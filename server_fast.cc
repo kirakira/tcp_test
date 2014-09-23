@@ -45,7 +45,7 @@ int main() {
             break;
 
         string str;
-        str = "aaaa";
+        str = "a";
         value = str.length();
         write(connfd, (const char*) &value, sizeof(value));
         if (value > 0)
