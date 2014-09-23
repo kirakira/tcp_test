@@ -10,16 +10,15 @@
 #include <sys/types.h>
 #include <time.h> 
 #include <string>
-#include <map>
 
 using namespace std;
+
+char buffer[1025];
 
 int main(int argc, char *argv[])
 {
     int listenfd = 0, connfd = 0;
     struct sockaddr_in serv_addr; 
-
-    char buffer[1025];
 
     listenfd = socket(AF_INET, SOCK_STREAM, 0);
     int on;
@@ -35,26 +34,24 @@ int main(int argc, char *argv[])
 
     listen(listenfd, 10); 
 
-    while(1)
-    {
-        connfd = accept(listenfd, (struct sockaddr*)NULL, NULL); 
-        setsockopt (connfd, SOL_TCP, TCP_NODELAY, &on, sizeof (on));
+    connfd = accept(listenfd, (struct sockaddr*) NULL, NULL); 
+    setsockopt (connfd, SOL_TCP, TCP_NODELAY, &on, sizeof (on));
 
-        map<string, string> table;
-        while (true) {
-            int value;
-            //string str;
-            read(connfd, &value, sizeof(value));
+    while (true) {
+        int value;
+        //string str;
+        read(connfd, &value, sizeof(value));
 
-            string str;
-            str = "aaaa";
-            value = str.length();
-            write(connfd, (const char*) &value, sizeof(value));
-            if (value > 0)
-                write(connfd, str.c_str(), value);
-        }
-
-        close(connfd);
-        sleep(1);
+        string str;
+        str = "aaaa";
+        value = str.length();
+        write(connfd, (const char*) &value, sizeof(value));
+        if (value > 0)
+            write(connfd, str.c_str(), value);
     }
+
+    close(connfd);
+
+    close(listenfd);
+    return 0;
 }
