@@ -5,13 +5,11 @@
 #include <netdb.h>
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
 #include <arpa/inet.h> 
 #include <signal.h>
 #include <string>
-#include <cstdlib>
 
 using namespace std;
 
@@ -54,7 +52,7 @@ int main(int argc, char *argv[])
     bool fail = false;
     char buffer[1025];
     for (int i = 0; !fail && i < 100; ++i) {
-        int value = rand();
+        int value = 113;
         if (sizeof(value) != write(sockfd, &value, sizeof(value)))
             fail = true;
 
