@@ -15,18 +15,6 @@
 
 using namespace std;
 
-bool ReadString(int fd, string* str) {
-    int len;
-    if (read(fd, (char*) &len, sizeof(len)) <= 0)
-        return false;
-    char* buffer = new char[len];
-    if (len > 0 && read(fd, buffer, len) <= 0)
-        return false;
-    *str = string(buffer, len);
-    delete[] buffer;
-    return true;
-}
-
 void signal_handler(int) {}
 
 int main(int argc, char *argv[])
@@ -73,7 +61,9 @@ int main(int argc, char *argv[])
         if (value != write(sockfd, str.c_str(), value))
             fail = true;
 
-        if (!ReadString(sockfd, &str))
+        if (sizeof(value) != read(sockfd, &value, sizeof(value)))
+            fail = true;
+        if (value != read(sockfd, buffer, value))
             fail = true;
     }
 
