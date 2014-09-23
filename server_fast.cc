@@ -14,18 +14,6 @@
 
 using namespace std;
 
-bool ReadString(int fd, string* str) {
-    int len;
-    if (read(fd, (char*) &len, sizeof(len)) <= 0)
-        return false;
-    char* buffer = new char[len];
-    if (len > 0 && read(fd, buffer, len) <= 0)
-        return false;
-    *str = string(buffer, len);
-    delete[] buffer;
-    return true;
-}
-
 int main(int argc, char *argv[])
 {
     int listenfd = 0, connfd = 0;
@@ -56,7 +44,8 @@ int main(int argc, char *argv[])
         while (true) {
             int value;
             string str;
-            ReadString(connfd, &str);
+            read(connfd, &value, sizeof(value));
+            read(connfd, buffer, value);
 
             str = "aaaa";
             value = str.length();
