@@ -10,3 +10,7 @@ Usage
 
     (in another terminal)
     $ time ./client
+
+Test results
+============
+On my computer (RHEL 6.5, Linux 2.6.32, gcc 4.8.2), the slow version took 3.9 seconds to finish (real 3.961s, user 0.005s, sys 0.004s), while the fast version only took 0.003 seconds (real 0.003s, user 0.000s, sys 0.002s).
