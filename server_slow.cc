@@ -39,7 +39,7 @@ int main() {
     connfd = accept(listenfd, (struct sockaddr*) NULL, NULL); 
 
     map<string, string> unused;
-    //string unused2 = "a";
+    string unused2 = "a";
     while (true) {
         int value;
         if (read(connfd, &value, sizeof(value)) <= 0)

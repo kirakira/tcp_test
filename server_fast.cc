@@ -38,14 +38,13 @@ int main() {
 
     connfd = accept(listenfd, (struct sockaddr*) NULL, NULL); 
 
-    //map<string, string> unused;
+    map<string, string> unused;
+    //string unused2 = "a";
     while (true) {
         int value;
         if (read(connfd, &value, sizeof(value)) <= 0)
             break;
 
-        string str;
-        str = "a";
         value = 1;
         write(connfd, (const char*) &value, sizeof(value));
         write(connfd, "a", 1);

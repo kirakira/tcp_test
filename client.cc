@@ -49,7 +49,7 @@ int main() {
 
         if (sizeof(value) != read(sockfd, &value, sizeof(value)))
             fail = true;
-        if (value != read(sockfd, buffer, 1))
+        if (1 != read(sockfd, buffer, 1))
             fail = true;
     }
 
