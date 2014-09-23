@@ -15,7 +15,7 @@ using namespace std;
 
 void signal_handler(int) {}
 
-int main(int argc, char *argv[]) {
+int main() {
     signal(SIGPIPE, signal_handler);
     char recvBuff[1024];
     struct sockaddr_in serv_addr; 

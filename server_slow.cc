@@ -16,7 +16,7 @@ using namespace std;
 
 void signal_handler(int) {}
 
-int main(int argc, char *argv[]) {
+int main() {
     signal(SIGPIPE, signal_handler);
 
     int listenfd = 0, connfd = 0;
