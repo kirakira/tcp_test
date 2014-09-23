@@ -63,66 +63,15 @@ int main(int argc, char *argv[])
 
         map<string, string> table;
         while (true) {
-            /*
-            int value;
-            read(connfd, (char*) &value, sizeof(value));
-            read(connfd, (char*) &value, sizeof(value));
-            value = rand();
-            write(connfd, (const char*) &value, sizeof(value));
-            value = rand();
-            write(connfd, (const char*) &value, sizeof(value));*/
-            /*
-            int value;
-            ReadN(connfd, (char*) &value, sizeof(value));
-            ReadN(connfd, (char*) &value, sizeof(value));
-            WriteN(connfd, (const char*) &value, sizeof(value));
-            WriteN(connfd, (const char*) &value, sizeof(value));*/
-            /*
-            string str;
-            ReadString(connfd, &str);
-            WriteString(connfd, "aaaa");*/
             int value;
             string str;
             ReadString(connfd, &str);
-            /*
-            read(connfd, (char*) &value, sizeof(value));
-            read(connfd, buffer, value);*/
             str = "aaaa";
             value = str.length();
-            /*write(connfd, (const char*) &value, sizeof(value));*/
-            /*
-            write(connfd, str.c_str(), value);*/
-            //WriteString(connfd, "aaaa");
                 int len = str.length();
                 write(connfd, (const char*) &len, sizeof(len));
                 if (value > 0)
                     write(connfd, str.c_str(), value);
-
-            /*
-            Message reply(random_string(4), random_string(4));
-            request.Serialize(connfd);*/
-            /*
-            Message request;
-            request.Deserialize(connfd);
-            if (request.ContainsValue()) {
-                string old_value;
-                if (table.count(request.key()) > 0) {
-                    Message reply(request.key(), table[request.key()]);
-                    reply.Serialize(connfd);
-                } else {
-                    Message reply(request.key());
-                    reply.Serialize(connfd);
-                }
-                table[request.key()] = request.value();
-            } else {
-                if (table.count(request.key()) > 0) {
-                    Message reply(request.key(), table[request.key()]);
-                    reply.Serialize(connfd);
-                } else {
-                    Message reply(request.key());
-                    reply.Serialize(connfd);
-                }
-            }*/
         }
 
         close(connfd);

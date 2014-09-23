@@ -72,59 +72,17 @@ int main(int argc, char *argv[])
         return 1;
     } 
 
+    bool fail = false;
     char buffer[1025];
-    for (int i = 0; i < 100; ++i) {
-        /*
-        int value = rand();
-        if (sizeof(value) != write(sockfd, (const char*) &value, sizeof(value)))
-            break;
-        value = rand();
-        if (sizeof(value) != write(sockfd, (const char*) &value, sizeof(value)))
-            break;
-        if (sizeof(value) != read(sockfd, (char*) &value, sizeof(value)))
-            break;
-        if (sizeof(value) != read(sockfd, (char*) &value, sizeof(value)))
-            break;*/
-        /*
-        int value = rand();
-        if (sizeof(value) != WriteN(sockfd, (const char*) &value, sizeof(value)))
-            break;
-        if (sizeof(value) != WriteN(sockfd, (const char*) &value, sizeof(value)))
-            break;
-        if (sizeof(value) != ReadN(sockfd, (char*) &value, sizeof(value)))
-            break;
-        if (sizeof(value) != ReadN(sockfd, (char*) &value, sizeof(value)))
-            break;*/
-        /*
-        string str;
+    for (int i = 0; !fail && i < 100; ++i) {
         if (!WriteString(sockfd, "aaaa"))
-            break;
-        if (!ReadString(sockfd, &str))
-            break;*/
-        /*
-        int value = 4;
-        if (4 != write(sockfd, (const char*) &value, sizeof(value)))
-            break;
-        if (4 != write(sockfd, "aaaa", 4))
-            break;*/
-        if (!WriteString(sockfd, "aaaa"))
-            break;
-        /*
-        if (4 != read(sockfd, (char*) &value, sizeof(value)))
-            break;
-        if (4 != read(sockfd, buffer, value))
-            break;*/
+            fail = true;
         string str;
         if (!ReadString(sockfd, &str))
-            break;
-        /*
-        Message request(random_string(4), random_string(4));
-        request.Serialize(sockfd);
-        Message response;
-        response.Deserialize(sockfd);*/
+            fail = true;
     }
 
-    if(n < 0)
+    if(n < 0 || fail)
     {
         printf("\n Read error \n");
     } 
