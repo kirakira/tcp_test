@@ -34,7 +34,6 @@ int main(int argc, char *argv[])
     listen(listenfd, 10); 
 
     connfd = accept(listenfd, (struct sockaddr*) NULL, NULL); 
-    setsockopt (connfd, SOL_TCP, TCP_NODELAY, &on, sizeof (on));
 
     map<string, string> table;
     while (true) {
