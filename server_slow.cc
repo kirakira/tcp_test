@@ -46,10 +46,9 @@ int main() {
 
         string str;
         str = "a";
-        value = str.length();
+        value = 1;
         write(connfd, (const char*) &value, sizeof(value));
-        if (value > 0)
-            write(connfd, "a", 1);
+        write(connfd, "a", 1);
     }
 
     close(connfd);
