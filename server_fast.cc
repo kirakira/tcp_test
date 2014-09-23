@@ -46,11 +46,10 @@ int main(int argc, char *argv[])
             string str;
             read(connfd, &value, sizeof(value));
 
+            //string str;
             str = "aaaa";
             value = str.length();
-            int len = str.length();
-            //write(connfd, (const char*) &len, sizeof(len));
-            write(connfd, (const char*) &value, sizeof(len));
+            write(connfd, (const char*) &value, sizeof(value));
             if (value > 0)
                 write(connfd, str.c_str(), value);
         }

@@ -54,8 +54,7 @@ int main(int argc, char *argv[])
     bool fail = false;
     char buffer[1025];
     for (int i = 0; !fail && i < 100; ++i) {
-        string str = "aaaa";
-        int value = str.length();
+        int value = rand();
         if (sizeof(value) != write(sockfd, &value, sizeof(value)))
             fail = true;
 
