@@ -15,15 +15,6 @@
 
 using namespace std;
 
-bool WriteString(int fd, const string& str) {
-    int len = str.length();
-    if (write(fd, (const char*) &len, sizeof(len)) <= 0)
-        return false;
-    if (len > 0 && write(fd, str.c_str(), len) <= 0)
-        return false;
-    return true;
-}
-
 bool ReadString(int fd, string* str) {
     int len;
     if (read(fd, (char*) &len, sizeof(len)) <= 0)
@@ -75,9 +66,13 @@ int main(int argc, char *argv[])
     bool fail = false;
     char buffer[1025];
     for (int i = 0; !fail && i < 100; ++i) {
-        if (!WriteString(sockfd, "aaaa"))
+        string str = "aaaa";
+        int value = str.length();
+        if (sizeof(value) != write(sockfd, &value, sizeof(value)))
             fail = true;
-        string str;
+        if (value != write(sockfd, str.c_str(), value))
+            fail = true;
+
         if (!ReadString(sockfd, &str))
             fail = true;
     }

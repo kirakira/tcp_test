@@ -14,15 +14,6 @@
 
 using namespace std;
 
-bool WriteString(int fd, const string& str) {
-    int len = str.length();
-    if (write(fd, (const char*) &len, sizeof(len)) <= 0)
-        return false;
-    if (len > 0 && write(fd, str.c_str(), len) <= 0)
-        return false;
-    return true;
-}
-
 bool ReadString(int fd, string* str) {
     int len;
     if (read(fd, (char*) &len, sizeof(len)) <= 0)
@@ -66,12 +57,14 @@ int main(int argc, char *argv[])
             int value;
             string str;
             ReadString(connfd, &str);
+
             str = "aaaa";
             value = str.length();
-                int len = str.length();
-                write(connfd, (const char*) &len, sizeof(len));
-                if (value > 0)
-                    write(connfd, str.c_str(), value);
+            int len = str.length();
+            write(connfd, (const char*) &len, sizeof(len));
+            //write(connfd, (const char*) &value, sizeof(len));
+            if (value > 0)
+                write(connfd, str.c_str(), value);
         }
 
         close(connfd);
