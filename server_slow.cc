@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <time.h> 
 #include <string>
+#include <map>
 
 using namespace std;
 
@@ -37,9 +38,9 @@ int main(int argc, char *argv[])
     connfd = accept(listenfd, (struct sockaddr*) NULL, NULL); 
     setsockopt (connfd, SOL_TCP, TCP_NODELAY, &on, sizeof (on));
 
+    map<string, string> table;
     while (true) {
         int value;
-        //string str;
         read(connfd, &value, sizeof(value));
 
         string str;
