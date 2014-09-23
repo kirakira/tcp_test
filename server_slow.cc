@@ -13,14 +13,13 @@
 
 using namespace std;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     int listenfd = 0, connfd = 0;
     struct sockaddr_in serv_addr; 
 
     listenfd = socket(AF_INET, SOCK_STREAM, 0);
     int on;
-    setsockopt (listenfd, SOL_TCP, TCP_NODELAY, &on, sizeof (on));
+    setsockopt(listenfd, SOL_TCP, TCP_NODELAY, &on, sizeof (on));
 
     memset(&serv_addr, '0', sizeof(serv_addr));
 
@@ -28,16 +27,17 @@ int main(int argc, char *argv[])
     serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     serv_addr.sin_port = htons(8000); 
 
-    bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)); 
+    bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
 
     listen(listenfd, 10); 
 
     connfd = accept(listenfd, (struct sockaddr*) NULL, NULL); 
 
-    map<string, string> table;
+    map<string, string> unused;
     while (true) {
         int value;
-        read(connfd, &value, sizeof(value));
+        if (read(connfd, &value, sizeof(value)) <= 0)
+            break;
 
         string str;
         str = "aaaa";

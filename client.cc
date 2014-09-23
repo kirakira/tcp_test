@@ -15,16 +15,14 @@ using namespace std;
 
 void signal_handler(int) {}
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     signal(SIGPIPE, signal_handler);
     int sockfd = 0, n = 0;
     char recvBuff[1024];
     struct sockaddr_in serv_addr; 
 
     memset(recvBuff, '0',sizeof(recvBuff));
-    if((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
-    {
+    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         printf("\n Error : Could not create socket \n");
         return 1;
     } 
@@ -37,15 +35,13 @@ int main(int argc, char *argv[])
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(8000); 
 
-    if(inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr)<=0)
-    {
+    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr)<=0) {
         printf("\n inet_pton error occured\n");
         return 1;
     } 
 
-    if( connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
-    {
-        printf("\n Error : Connect Failed \n");
+    if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) {
+        printf("\n Error : Connect Failed: %d \n", errno);
         return 1;
     } 
 
@@ -62,10 +58,8 @@ int main(int argc, char *argv[])
             fail = true;
     }
 
-    if(n < 0 || fail)
-    {
+    if (n < 0 || fail)
         printf("\n Read error \n");
-    } 
 
     return 0;
 }
