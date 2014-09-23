@@ -41,7 +41,6 @@ int main() {
     } 
 
     bool fail = false;
-    char buffer[1025];
     for (int i = 0; !fail && i < 100; ++i) {
         int value = 113;
         if (sizeof(value) != write(sockfd, &value, sizeof(value)))
@@ -49,7 +48,7 @@ int main() {
 
         if (sizeof(value) != read(sockfd, &value, sizeof(value)))
             fail = true;
-        if (1 != read(sockfd, buffer, 1))
+        if (sizeof(value) != read(sockfd, &value, sizeof(value)))
             fail = true;
     }
 

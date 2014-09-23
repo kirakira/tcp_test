@@ -47,7 +47,7 @@ int main() {
 
         value = 1;
         write(connfd, (const char*) &value, sizeof(value));
-        write(connfd, "a", 1);
+        write(connfd, (const char*) &value, sizeof(value));
     }
 
     close(connfd);
