@@ -6,6 +6,7 @@ Usage
 =====
 
     $ make
-    $ ./server_slow #(or ./server_fast)
+    $ ./server_slow (or ./server_fast)
+
     (in another terminal)
     $ time ./client
