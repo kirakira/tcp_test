@@ -10,10 +10,15 @@
 #include <time.h> 
 #include <string>
 #include <map>
+#include <signal.h>
 
 using namespace std;
 
+void signal_handler(int) {}
+
 int main(int argc, char *argv[]) {
+    signal(SIGPIPE, signal_handler);
+
     int listenfd = 0, connfd = 0;
     struct sockaddr_in serv_addr; 
 
