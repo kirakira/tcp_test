@@ -14,8 +14,6 @@
 
 using namespace std;
 
-char buffer[1025];
-
 int main(int argc, char *argv[])
 {
     int listenfd = 0, connfd = 0;
