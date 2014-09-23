@@ -49,7 +49,7 @@ int main() {
         value = str.length();
         write(connfd, (const char*) &value, sizeof(value));
         if (value > 0)
-            write(connfd, str.c_str(), value);
+            write(connfd, "a", 1);
     }
 
     close(connfd);
