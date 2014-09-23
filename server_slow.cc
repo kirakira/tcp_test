@@ -27,17 +27,15 @@ int main() {
     setsockopt(listenfd, SOL_TCP, TCP_NODELAY, &on, sizeof (on));
 
     memset(&serv_addr, '0', sizeof(serv_addr));
-
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     serv_addr.sin_port = htons(8000); 
 
     bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
-
     listen(listenfd, 10); 
-
     connfd = accept(listenfd, (struct sockaddr*) NULL, NULL); 
 
+    // Comment out either the next two lines will make the program 100 times faster
     map<string, string> unused;
     string unused2 = "a";
     while (true) {
@@ -45,7 +43,7 @@ int main() {
         if (read(connfd, &value, sizeof(value)) <= 0)
             break;
 
-        value = 1;
+        value = 0;
         write(connfd, (const char*) &value, sizeof(value));
         write(connfd, (const char*) &value, sizeof(value));
     }

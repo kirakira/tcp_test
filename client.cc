@@ -9,7 +9,6 @@
 #include <errno.h>
 #include <arpa/inet.h> 
 #include <signal.h>
-#include <string>
 
 using namespace std;
 
@@ -42,7 +41,7 @@ int main() {
 
     bool fail = false;
     for (int i = 0; !fail && i < 100; ++i) {
-        int value = 113;
+        int value = 0;
         if (sizeof(value) != write(sockfd, &value, sizeof(value)))
             fail = true;
 
