@@ -58,8 +58,6 @@ int main(int argc, char *argv[])
         int value = str.length();
         if (sizeof(value) != write(sockfd, &value, sizeof(value)))
             fail = true;
-        if (value != write(sockfd, str.c_str(), value))
-            fail = true;
 
         if (sizeof(value) != read(sockfd, &value, sizeof(value)))
             fail = true;

@@ -45,7 +45,6 @@ int main(int argc, char *argv[])
             int value;
             string str;
             read(connfd, &value, sizeof(value));
-            read(connfd, buffer, value);
 
             str = "aaaa";
             value = str.length();
