@@ -1,3 +1,4 @@
+#include <netdb.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <netinet/in.h>
@@ -10,8 +11,6 @@
 #include <arpa/inet.h> 
 #include <signal.h>
 
-using namespace std;
-
 void signal_handler(int) {}
 
 int main() {
@@ -23,7 +22,7 @@ int main() {
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
     int on;
-    setsockopt (sockfd, SOL_TCP, TCP_NODELAY, &on, sizeof (on));
+    setsockopt(sockfd, getprotobyname("TCP")->p_proto, TCP_NODELAY, &on, sizeof(on));
 
     memset(&serv_addr, '0', sizeof(serv_addr)); 
     serv_addr.sin_family = AF_INET;

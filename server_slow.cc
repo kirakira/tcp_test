@@ -1,4 +1,5 @@
 #include <sys/socket.h>
+#include <netdb.h>
 #include <netinet/tcp.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -24,7 +25,7 @@ int main() {
 
     listenfd = socket(AF_INET, SOCK_STREAM, 0);
     int on;
-    setsockopt(listenfd, SOL_TCP, TCP_NODELAY, &on, sizeof (on));
+    setsockopt(listenfd, getprotobyname("TCP")->p_proto, TCP_NODELAY, &on, sizeof(on));
 
     memset(&serv_addr, '0', sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
